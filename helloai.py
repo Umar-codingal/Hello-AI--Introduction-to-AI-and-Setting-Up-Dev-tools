@@ -1,43 +1,49 @@
-name=input("Hello User, please enter your name: ")
+import tkinter as tk
+from tkinter import PhotoImage
 
-print("Hello,", name, "!")
+def chatbot():
+    print("Hello, User! Let's chat!")
 
-mood=input("How are you feeling today? (happy/sad): ")
-mood=mood.lower()
+    while True:
+        name = input("Please enter your name: ")
+        print("Hello,", name, "!")
 
-if mood=="happy":
-    print("That's great to hear! Keep smiling :)")
-elif mood=="sad":
-    import tkinter as tk
-    from tkinter import PhotoImage
+        mood = input("How are you feeling today? (happy/sad/neutral): ").lower()
 
+        if mood == "happy":
+            print("That's great to hear! Keep smiling :)")
+            
+        elif mood == "sad":
+            print(f"Sorry to hear that. I hope your day gets better!")
+            display_gif("crying.gif")
+        elif mood == "neutral":
+            print("That's okay! I hope something exciting happens today!")
+           
+        else:
+            print("I don't quite understand that mood, but I hope you have a great day!")
+            display_gif("man.gif")
+
+        repeat = input("Do you want to chat more? (yes/no): ").lower()
+        if repeat == "no":
+            print("Goodbye! Take care!")
+            break
+        elif repeat != "yes":
+            print("I didn't quite get that. Let's chat again.")
+            continue
+
+def display_gif(gif_name):
     root = tk.Tk()
-    root.title("GIF Example")
+    root.title("Emotion GIF")
 
-# Load the GIF
-    gif = PhotoImage(file="crying.gif")
+    # Load the GIF
+    gif = PhotoImage(file=gif_name)
 
-# Create a label to display the GIF
+    # Create a label to display the GIF
     label = tk.Label(root, image=gif)
     label.pack()
 
-# Run the main event loop
+    # Run the main event loop
     root.mainloop()
 
-    print(f"Sorry to hear that. I hope your day gets better!")
-else:
-
-    root = tk.Tk()
-    root.title("GIF Example")
-
-# Load the GIF
-    gif = PhotoImage(file="man.gif")
-
-# Create a label to display the GIF
-    label = tk.Label(root, image=gif)
-    label.pack()
-
-# Run the main event loop
-    root.mainloop()
-    print("I don't understand that mood. But I hope you have a great day!")
-
+# Run the chatbot function
+chatbot()
